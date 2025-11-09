@@ -1,372 +1,790 @@
-# Hardware Trojan Detection via Side-Channel Analysis# Hardware Trojan Detection via Side-Channel Analysis
+<div align="center"><div align="center">
 
 
 
-## Project Overview## Project Overview
+# 🔐 Hardware Trojan Detection# 🔐 Hardware Trojan Detection
+
+### Side-Channel Analysis for Chip Security
+
+### Side-Channel Analysis for Chip Security
+
+![Platform](https://img.shields.io/badge/Platform-Verilog-blue)
+
+![Platform](https://img.shields.io/badge/Platform-Verilog-blue)![Python](https://img.shields.io/badge/Python-3.8+-green)
+
+![Python](https://img.shields.io/badge/Python-3.8+-green)![License](https://img.shields.io/badge/License-Educational-orange)
+
+![License](https://img.shields.io/badge/License-Educational-orange)![Status](https://img.shields.io/badge/Status-Active-success)
+
+![Status](https://img.shields.io/badge/Status-Active-success)
+
+*Detecting stealthy hardware backdoors through switching activity analysis*
+
+*Detecting stealthy hardware backdoors through switching activity analysis*
+
+[Features](#-features) • [Quick Start](#-quick-start) • [Demo](#-live-demo) • [Results](#-results) • [Methodology](#-methodology)
+
+[Features](#-features) • [Quick Start](#-quick-start) • [Demo](#-live-demo) • [Results](#-results) • [Methodology](#-methodology)
+
+---
+
+---
+
+</div>
+
+</div>
+
+## 📋 Overview
+
+## 📋 Overview
+
+This project implements a **side-channel based approach** to detect hardware Trojans in digital circuits. By analyzing switching activity patterns in VCD (Value Change Dump) files, we can identify malicious modifications **without requiring knowledge of trigger conditions or payload behavior**.
+
+This project implements a **side-channel based approach** to detect hardware Trojans in digital circuits. By analyzing switching activity patterns in VCD (Value Change Dump) files, we can identify malicious modifications **without requiring knowledge of trigger conditions or payload behavior**.
+
+### 🎯 The Challenge
+
+### 🎯 The Challenge
+
+Hardware Trojans are stealthy backdoors inserted into IC designs that:
+
+Hardware Trojans are stealthy backdoors inserted into IC designs that:- Remain dormant during normal testing (rare trigger conditions)
+
+- Pass functional verification with flying colors
+
+- Remain dormant during normal testing (rare trigger conditions)- Activate only under specific, hard-to-detect scenarios
+
+- Pass functional verification with flying colors- Can leak sensitive data or corrupt computations
+
+- Activate only under specific, hard-to-detect scenarios
+
+- Can leak sensitive data or corrupt computations### 💡 Our Solution
 
 
 
-This project implements a side-channel based approach to hardware Trojan detection in digital circuits. The methodology focuses on analyzing switching activity patterns to identify malicious modifications without requiring knowledge of the Trojan trigger conditions or payload behavior.This project implements a side-channel based approach to hardware Trojan detection in digital circuits. The methodology focuses on analyzing switching activity patterns to identify malicious modifications without requiring knowledge of the Trojan trigger conditions or payload behavior.
+### 💡 Our Solution**Side-channel switching activity analysis** reveals Trojans by detecting anomalies in signal toggle patterns, even when the malicious logic never activates during testing.
 
 
 
-### Technical Approach### Technical Approach
+**Side-channel switching activity analysis** reveals Trojans by detecting anomalies in signal toggle patterns, even when the malicious logic never activates during testing.
 
 
 
-The detection system compares switching activity between a reference (golden) design and a potentially infected circuit. Statistical analysis of signal toggle rates reveals anomalies introduced by Trojan circuitry, even when the malicious logic remains dormant during functional testing.The detection system compares switching activity between a reference (golden) design and a potentially infected circuit. Statistical analysis of signal toggle rates reveals anomalies introduced by Trojan circuitry, even when the malicious logic remains dormant during functional testing.
+---### Technical Approach### Technical Approach
 
 
 
-### Core Capabilities### Key Features
+## ✨ Features
 
 
+
+| Feature | Description |The detection system compares switching activity between a reference (golden) design and a potentially infected circuit. Statistical analysis of signal toggle rates reveals anomalies introduced by Trojan circuitry, even when the malicious logic remains dormant during functional testing.The detection system compares switching activity between a reference (golden) design and a potentially infected circuit. Statistical analysis of signal toggle rates reveals anomalies introduced by Trojan circuitry, even when the malicious logic remains dormant during functional testing.
+
+|---------|-------------|
+
+| 🎯 **Multi-Algorithm Detection** | Threshold-based, IQR outlier analysis, and Z-score normalization |
+
+| 🕵️ **Stealthy Trojan** | Low-probability trigger (1/256) with minimal functional footprint |
+
+| ⚡ **Automated Pipeline** | End-to-end simulation, extraction, and analysis |### Core Capabilities### Key Features
+
+| 📊 **Rich Visualization** | 6-panel comprehensive report with statistical analysis |
+
+| 🐍 **Dual Platform** | Python and MATLAB analysis engines |
+
+| ✅ **100% Detection Rate** | Successfully identifies all 4 Trojan signals |
 
 - Multi-algorithm detection using threshold analysis, IQR outlier detection, and Z-score normalization- **Multi-algorithm Detection**: Threshold-based, IQR outlier analysis, and Z-score normalization
 
+---
+
 - Stealthy Trojan implementation with low-probability trigger mechanism- **Stealthy Trojan Implementation**: Low-probability trigger with minimal functional footprint
-
-- Automated simulation and analysis pipeline- **Automated Analysis Pipeline**: Integrated simulation, data extraction, and statistical processing
-
-- Statistical visualization and comprehensive reporting- **Comprehensive Visualization**: Signal-level comparison, distribution analysis, and anomaly ranking
-
-- Cross-platform analysis tools (Python and MATLAB)- **Dual-Platform Support**: Python and MATLAB analysis engines
-
-
-
-------
-
-
-
-## System Architecture## Architecture
-
-
-
-### Directory Structure### Project Structure
-
-
-
-```text```
-
-Silicon_Sprint/Silicon_Sprint/
-
-├── rtl/├── rtl/
-
-│   ├── alu_clean.v              # Reference ALU design│   ├── alu_clean.v          # Clean ALU implementation
-
-│   └── alu_trojan.v             # Trojan-infected ALU│   └── alu_trojan.v         # Trojan-infected ALU
-
-├── testbench/├── testbench/
-
-│   ├── alu_testbench.v          # Testbench for clean design│   ├── alu_testbench.v      # Main testbench (clean ALU)
-
-│   └── alu_testbench_trojan.v   # Testbench for infected design│   └── alu_testbench_trojan.v  # Trojan testbench
-
-├── analysis/├── analysis/
-
-│   ├── trojan_detector.py       # Python analysis engine│   └── trojan_detector.py   # Advanced Python analysis tool
-
-│   └── trojan_detector.m        # MATLAB analysis engine├── results/
-
-├── results/│   ├── alu_clean.vcd        # Clean design VCD (generated)
-
-│   ├── alu_clean.vcd            # Clean design waveform│   ├── alu_trojan.vcd       # Trojan design VCD (generated)
-
-│   ├── alu_trojan.vcd           # Trojan design waveform│   ├── simulation.log       # Simulation logs
-
-│   ├── detection_report.txt     # Text analysis report│   ├── detection_report.txt # Text analysis report
-
-│   └── trojan_detection_report.png  # Visual report│   └── trojan_detection_report.png  # Visual report
-
-├── docs/├── docs/
-
-│   ├── methodology.md           # Technical methodology│   └── methodology.md       # Detailed methodology
-
-│   └── presentation_guide.md    # Presentation materials└── README.md
-
-└── README.md```
-
-```
-
-### ALU Specifications
-
-### ALU Specifications
-
-**Operations**: ADD, SUB, AND, OR  
-
-- **Operations**: ADD, SUB, AND, OR**Data Width**: 4-bit operands  
-
-- **Data Width**: 4-bit operands**Control**: 2-bit operation select  
-
-- **Control**: 2-bit operation select**Flags**: Carry, Zero, Overflow  
-
-- **Flags**: Carry, Zero, Overflow**Clock**: 100 MHz (10ns period)  
-
-- **Clock**: 100 MHz (10ns period)
-
----
-
----
-
-## 🔒 Trojan Specification
-
-## Trojan Implementation
-
-### Trigger Condition
-
-### Trigger Specification```verilog
-
-Trigger: A == 4'b1111 AND B == 4'b1111 AND op == 2'b00 (ADD operation)
-
-```verilogProbability: 1/1024 ≈ 0.098% (rare activation)
-
-Trigger Condition: A == 4'b1111 AND B == 4'b1111 AND op == 2'b00```
-
-Activation Probability: 1/1024 (0.098%)
-
-```### Payload
-
-```verilog
-
-The trigger requires a specific combination of maximum input values and the ADD operation, making it highly unlikely to activate during normal testing.Effect: XOR result with 4'b0001 (flips least significant bit)
-
-Impact: 1-bit corruption in output when triggered
-
-### Payload Specification```
-
-
-
-```verilog### Side-Channel Signature
-
-Effect: XOR result with 4'b0001- **Extra signals**: `trojan_trigger`, `trojan_active`, `payload_mask`, `trigger_counter`
-
-Impact: Single-bit corruption in LSB position- **Increased switching**: Additional toggle events in trojan-specific logic
-
-```- **Multi-cycle activation**: 3-cycle trigger mechanism for stealth
-
-
-
-When triggered, the payload flips the least significant bit of the ALU output, introducing a subtle computational error.### Design Philosophy
-
-
-
-### Detection CharacteristicsThe Trojan is intentionally designed to be:
-
-1. **Functionally stealthy**: Activates under rare conditions
-
-The Trojan introduces additional hardware signals:2. **Side-channel visible**: Creates detectable switching activity
-
-3. **Realistic**: Mimics real-world hardware backdoors
-
-- `trojan_trigger`: Detects trigger condition4. **Pedagogical**: Demonstrates detection methodology clearly
-
-- `trojan_active`: Multi-cycle activation state
-
-- `payload_mask`: Payload control logic---
-
-- `trigger_counter`: 3-bit state counter
 
 ## 🚀 Quick Start
 
-These signals generate switching activity that deviates from the reference design, enabling side-channel detection.
+- Automated simulation and analysis pipeline- **Automated Analysis Pipeline**: Integrated simulation, data extraction, and statistical processing
 
 ### Prerequisites
 
-### Design Rationale
+- Statistical visualization and comprehensive reporting- **Comprehensive Visualization**: Signal-level comparison, distribution analysis, and anomaly ranking
 
 ```bash
 
-The Trojan design balances several competing requirements:# Verilog Simulator (choose one)
+# Required- Cross-platform analysis tools (Python and MATLAB)- **Dual-Platform Support**: Python and MATLAB analysis engines
 
-- Icarus Verilog (iverilog) - Recommended for Windows
+- Icarus Verilog (iverilog)
 
-1. Functional stealth through rare activation conditions- ModelSim
+- Python 3.8+
 
-2. Side-channel visibility through detectable switching patterns- Vivado Simulator
+- pip install numpy matplotlib seaborn
 
-3. Realistic threat modeling based on documented attack scenarios
+------
 
-4. Educational clarity for demonstration purposes# Python 3.8+
+# Optional
 
-pip install numpy matplotlib seaborn
-
----```
-
-
-
-## Installation and Setup### Installation
-
-
-
-### Prerequisites```powershell
-
-# Clone or extract project
-
-**Verilog Simulator** (choose one):cd Silicon_Sprint
-
-
-
-- Icarus Verilog (recommended for Windows)# Verify directory structure
-
-- ModelSimdir
-
-- Vivado Simulator```
-
-
-
-**Python Environment** (version 3.8 or higher):### Running the Complete Analysis
-
-
-
-```bash#### Option 1: Automated (Recommended)
-
-pip install numpy matplotlib seaborn
-
-``````powershell
-
-# Run complete simulation and analysis
-
-**MATLAB** (optional, for alternative analysis):python run_analysis.py
+- MATLAB (for alternative analysis)
 
 ```
 
-- Base MATLAB installation
+## System Architecture## Architecture
 
-- No additional toolboxes required#### Option 2: Manual Steps
-
-
-
-### Installation Steps```powershell
-
-# Step 1: Simulate clean ALU
-
-```powershelliverilog -o alu_clean.vvp rtl\alu_clean.v testbench\alu_testbench.v
-
-# Navigate to project directoryvvp alu_clean.vvp
-
-cd Silicon_Sprint
-
-# Step 2: Simulate Trojan ALU
-
-# Install Python dependenciesiverilog -o alu_trojan.vvp rtl\alu_trojan.v testbench\alu_testbench_trojan.v
-
-pip install -r requirements.txtvvp alu_trojan.vvp
+### Installation
 
 
 
-# Verify installation# Step 3: Run analysis
+```powershell
 
-python --versionpython analysis\trojan_detector.py
+# Clone the repository### Directory Structure### Project Structure
 
-iverilog -v```
+git clone https://github.com/Lucii-666/Hardware-Trojan-.git
 
-```
+cd Hardware-Trojan-
 
----
 
----
 
-## 📊 Analysis Methodology
+# Install dependencies```text```
 
-## Usage
+pip install -r requirements.txt
 
-### 1. Data Collection
+Silicon_Sprint/Silicon_Sprint/
 
-### Automated Execution
+# Verify installation
 
-**VCD Generation**: Both designs simulated with identical test vectors
+iverilog -v├── rtl/├── rtl/
 
-The automated script handles compilation, simulation, and analysis:- 1024 exhaustive test cases (16×16×4 combinations)
+python --version
 
-- Value Change Dump (VCD) format for switching activity
+```│   ├── alu_clean.v              # Reference ALU design│   ├── alu_clean.v          # Clean ALU implementation
 
-```powershell- Signal-level toggle tracking
+
+
+### Run Detection (30 seconds)│   └── alu_trojan.v             # Trojan-infected ALU│   └── alu_trojan.v         # Trojan-infected ALU
+
+
+
+```powershell├── testbench/├── testbench/
+
+# Option 1: Quick Demo (10 seconds)
+
+cd presentation\demo_files│   ├── alu_testbench.v          # Testbench for clean design│   ├── alu_testbench.v      # Main testbench (clean ALU)
+
+.\run_quick_demo.ps1
+
+│   └── alu_testbench_trojan.v   # Testbench for infected design│   └── alu_testbench_trojan.v  # Trojan testbench
+
+# Option 2: Full Analysis (30 seconds)
+
+cd ..\..├── analysis/├── analysis/
 
 python run_analysis.py
 
-```### 2. Toggle Counting
+│   ├── trojan_detector.py       # Python analysis engine│   └── trojan_detector.py   # Advanced Python analysis tool
 
+# Option 3: Manual Analysis
 
-
-This executes:**Algorithm**:
-
-```python
-
-1. Verilog compilation for both designsFor each signal:
-
-2. Simulation with exhaustive test vectors    Count transitions: 0→1 and 1→0
-
-3. VCD file generation    Track multi-bit toggles in buses
-
-4. Statistical analysis    Store per-signal toggle counts
-
-5. Report generation```
-
-
-
-### Manual Execution### 3. Deviation Analysis
-
-
-
-For step-by-step execution:**Metric**:
+python analysis\trojan_detector.py│   └── trojan_detector.m        # MATLAB analysis engine├── results/
 
 ```
 
-```powershellDeviation (%) = |Trojan_Toggles - Clean_Toggles| / Clean_Toggles × 100
-
-# Step 1: Compile and simulate clean ALU```
-
-iverilog -o alu_clean.vvp rtl\alu_clean.v testbench\alu_testbench.v
-
-vvp alu_clean.vvp**Thresholds**:
-
-- 🟢 **< 25%**: Normal variation
-
-# Step 2: Compile and simulate Trojan ALU- 🟡 **25-50%**: Suspicious (WARNING)
-
-iverilog -o alu_trojan.vvp rtl\alu_trojan.v testbench\alu_testbench_trojan.v- 🔴 **> 50%**: Highly suspicious (CRITICAL)
-
-vvp alu_trojan.vvp
-
-### 4. Statistical Detection
-
-# Step 3: Run analysis (Python)
-
-python analysis\trojan_detector.py**Methods**:
-
-- **Mean/Median Analysis**: Population statistics
-
-# Or run analysis (MATLAB)- **IQR Outlier Detection**: Q3 + 1.5×IQR threshold
-
-cd analysis- **Z-Score Analysis**: Signals with |z| > 2.5
-
-matlab -r "trojan_detector"- **Quartile Analysis**: Distribution characterization
-
-```
-
-### 5. Machine Learning Detection
+├── results/│   ├── alu_clean.vcd        # Clean design VCD (generated)
 
 ---
 
-**Approach**: Anomaly detection via statistical outliers
+│   ├── alu_clean.vcd            # Clean design waveform│   ├── alu_trojan.vcd       # Trojan design VCD (generated)
 
-## Detection Methodology- Z-score normalization
+## 🎬 Live Demo
 
-- Automated threshold selection
+│   ├── alu_trojan.vcd           # Trojan design waveform│   ├── simulation.log       # Simulation logs
 
-### Phase 1: Data Collection- Ranking by suspicion level
+We provide **4 presentation options** to showcase both ALU designs:
+
+│   ├── detection_report.txt     # Text analysis report│   ├── detection_report.txt # Text analysis report
+
+| Demo | Time | Best For |
+
+|------|------|----------|│   └── trojan_detection_report.png  # Visual report│   └── trojan_detection_report.png  # Visual report
+
+| 🚄 **Quick Demo** | 10s | Fast presentations, time-limited demos |
+
+| 🎯 **Interactive Demo** | 3-5min | Detailed walkthrough, Q&A sessions |├── docs/├── docs/
+
+| 📊 **Compare Designs** | 30s | Side-by-side comparison table |
+
+| 🔬 **Dual Demo** | 1min | Technical deep-dive |│   ├── methodology.md           # Technical methodology│   └── methodology.md       # Detailed methodology
 
 
+
+```powershell│   └── presentation_guide.md    # Presentation materials└── README.md
+
+# Run any demo from presentation/demo_files/
+
+cd presentation\demo_files└── README.md```
+
+.\interactive_demo.ps1  # Step-by-step walkthrough
+
+``````
+
+
+
+---### ALU Specifications
+
+
+
+## 📊 Results### ALU Specifications
+
+
+
+### Detection Success**Operations**: ADD, SUB, AND, OR  
+
+
+
+```- **Operations**: ADD, SUB, AND, OR**Data Width**: 4-bit operands  
+
+🚨 TROJAN DETECTED - 4 suspicious signals identified
+
+- **Data Width**: 4-bit operands**Control**: 2-bit operation select  
+
+Top Detections:
+
+  1. trigger_counter  → 45,900% deviation (459 toggles)- **Control**: 2-bit operation select**Flags**: Carry, Zero, Overflow  
+
+  2. trojan_trigger   → 20,500% deviation (205 toggles)
+
+  3. trojan_active    → 13,700% deviation (137 toggles)- **Flags**: Carry, Zero, Overflow**Clock**: 100 MHz (10ns period)  
+
+  4. payload_mask     → 10,300% deviation (103 toggles)
+
+- **Clock**: 100 MHz (10ns period)
+
+Detection Rate: 100% ✅
+
+False Positives: 0 ✅---
+
+Analysis Time: <1 second ⚡
+
+```---
+
+
+
+### Visual Report## 🔒 Trojan Specification
+
+
+
+The analysis generates a comprehensive 6-panel report:## Trojan Implementation
+
+
+
+![Detection Report](results/trojan_detection_report.png)### Trigger Condition
+
+
+
+**Report Contents:**### Trigger Specification```verilog
+
+
+
+- 📊 Toggle count comparison (clean vs trojan)Trigger: A == 4'b1111 AND B == 4'b1111 AND op == 2'b00 (ADD operation)
+
+- 📈 Deviation percentage ranking
+
+- 🎯 Multi-algorithm anomaly detection```verilogProbability: 1/1024 ≈ 0.098% (rare activation)
+
+- 📉 Statistical distribution analysis
+
+- 🔍 Signal-level breakdownTrigger Condition: A == 4'b1111 AND B == 4'b1111 AND op == 2'b00```
+
+- ✅ Final verdict with evidence
+
+Activation Probability: 1/1024 (0.098%)
+
+---
+
+```### Payload
+
+## 🏗️ Project Structure
+
+```verilog
+
+```
+
+Silicon_Sprint/The trigger requires a specific combination of maximum input values and the ADD operation, making it highly unlikely to activate during normal testing.Effect: XOR result with 4'b0001 (flips least significant bit)
+
+│
+
+├── 📁 rtl/                          # Verilog Hardware DesignsImpact: 1-bit corruption in output when triggered
+
+│   ├── alu_clean.v                  # Clean 4-bit ALU (reference)
+
+│   └── alu_trojan.v                 # Infected ALU (4 extra signals)### Payload Specification```
+
+│
+
+├── 📁 testbench/                    # Verification Testbenches
+
+│   ├── alu_testbench.v              # Exhaustive testing (1024 cases)
+
+│   └── alu_testbench_trojan.v       # Trojan testbench```verilog### Side-Channel Signature
+
+│
+
+├── 📁 analysis/                     # Detection EnginesEffect: XOR result with 4'b0001- **Extra signals**: `trojan_trigger`, `trojan_active`, `payload_mask`, `trigger_counter`
+
+│   ├── trojan_detector.py           # Python analysis (600+ lines)
+
+│   └── trojan_detector.m            # MATLAB alternativeImpact: Single-bit corruption in LSB position- **Increased switching**: Additional toggle events in trojan-specific logic
+
+│
+
+├── 📁 results/                      # Generated Outputs```- **Multi-cycle activation**: 3-cycle trigger mechanism for stealth
+
+│   ├── alu_clean.vcd                # Clean design waveform
+
+│   ├── alu_trojan.vcd               # Trojan design waveform
+
+│   ├── detection_report.txt         # Text analysis
+
+│   └── trojan_detection_report.png  # Visual report (510KB)When triggered, the payload flips the least significant bit of the ALU output, introducing a subtle computational error.### Design Philosophy
+
+│
+
+├── 📁 presentation/                 # Demo Materials
+
+│   ├── demo_files/                  # 4 presentation scripts
+
+│   ├── code_snippets/               # Code examples for slides### Detection CharacteristicsThe Trojan is intentionally designed to be:
+
+│   └── visuals/                     # Graphics and charts
+
+│1. **Functionally stealthy**: Activates under rare conditions
+
+├── 📄 run_analysis.py               # Automated full pipeline
+
+├── 📄 requirements.txt              # Python dependenciesThe Trojan introduces additional hardware signals:2. **Side-channel visible**: Creates detectable switching activity
+
+└── 📄 HOW_TO_PRESENT.txt           # Presentation guide
+
+```3. **Realistic**: Mimics real-world hardware backdoors
+
+
+
+---- `trojan_trigger`: Detects trigger condition4. **Pedagogical**: Demonstrates detection methodology clearly
+
+
+
+## 🔬 Methodology- `trojan_active`: Multi-cycle activation state
+
+
+
+### Step 1: Design Comparison- `payload_mask`: Payload control logic---
+
+
+
+We compare two 4-bit ALU implementations:- `trigger_counter`: 3-bit state counter
+
+
+
+| Specification | Clean ALU | Trojan ALU |## 🚀 Quick Start
+
+|---------------|-----------|------------|
+
+| **Operations** | ADD, SUB, AND, OR | Same |These signals generate switching activity that deviates from the reference design, enabling side-channel detection.
+
+| **Data Width** | 4-bit | 4-bit |
+
+| **Control** | 2-bit op select | 2-bit op select |### Prerequisites
+
+| **Signals** | 7 signals | **11 signals (+4 Trojan)** |
+
+| **Behavior** | Normal | Normal 99.6% of time |### Design Rationale
+
+
+
+### Step 2: Trojan Specification```bash
+
+
+
+**Trigger Condition:**The Trojan design balances several competing requirements:# Verilog Simulator (choose one)
+
+
+
+```verilog- Icarus Verilog (iverilog) - Recommended for Windows
+
+Trigger: A == 4'b1111 AND B == 4'b1111 AND op == 2'b00
+
+Probability: 1/256 (0.4% activation rate)1. Functional stealth through rare activation conditions- ModelSim
+
+```
+
+2. Side-channel visibility through detectable switching patterns- Vivado Simulator
+
+**Payload:**
+
+3. Realistic threat modeling based on documented attack scenarios
+
+```verilog
+
+Effect: XOR result with 4'b0001 (flips LSB)4. Educational clarity for demonstration purposes# Python 3.8+
+
+Impact: Single-bit corruption when triggered
+
+```pip install numpy matplotlib seaborn
+
+
+
+**Side-Channel Signature:**---```
+
+
+
+The Trojan adds 4 extra signals that create detectable switching activity:
+
+
+
+- `trojan_trigger` - Detects trigger condition (205 toggles)## Installation and Setup### Installation
+
+- `trojan_active` - Multi-cycle activation state (137 toggles)
+
+- `trigger_counter` - 3-bit state counter (459 toggles)
+
+- `payload_mask` - Payload control logic (103 toggles)
+
+### Prerequisites```powershell
+
+### Step 3: Detection Algorithm
+
+# Clone or extract project
+
+```python
+
+1. Simulate both designs with 1024 exhaustive test vectors**Verilog Simulator** (choose one):cd Silicon_Sprint
+
+2. Extract VCD files and count signal toggles
+
+3. Calculate deviations: deviation = |trojan - clean| / clean × 100%
+
+4. Apply three detection methods:
+
+   - Threshold: deviation > 25%- Icarus Verilog (recommended for Windows)# Verify directory structure
+
+   - IQR Outlier: Q3 + 1.5×IQR
+
+   - Z-score: |z| > 2.5σ- ModelSimdir
+
+5. Rank anomalies and identify Trojan signals
+
+```- Vivado Simulator```
+
+
+
+### Step 4: Statistical Analysis
+
+
+
+The detector performs comprehensive statistical analysis:**Python Environment** (version 3.8 or higher):### Running the Complete Analysis
+
+
+
+- **Toggle Counting**: Tracks 0→1 and 1→0 transitions
+
+- **Deviation Calculation**: Percentage difference from reference
+
+- **Outlier Detection**: IQR-based anomaly identification```bash#### Option 1: Automated (Recommended)
+
+- **Z-Score Normalization**: Standard deviation analysis
+
+- **Multi-Method Consensus**: Combines three detection algorithmspip install numpy matplotlib seaborn
+
+
+
+---``````powershell
+
+
+
+## 🔒 Trojan Design Philosophy# Run complete simulation and analysis
+
+
+
+Our Trojan implementation balances four key requirements:**MATLAB** (optional, for alternative analysis):python run_analysis.py
+
+
+
+1. **Functional Stealth** - Rare activation (1/256 cases) bypasses normal testing```
+
+2. **Side-Channel Visibility** - Extra signals create detectable switching patterns
+
+3. **Realistic Threat** - Mimics real-world hardware backdoors- Base MATLAB installation
+
+4. **Educational Clarity** - Demonstrates detection methodology effectively
+
+- No additional toolboxes required#### Option 2: Manual Steps
+
+---
+
+
+
+## 🛠️ Hardware Specifications
+
+### Installation Steps```powershell
+
+### ALU Operations
+
+# Step 1: Simulate clean ALU
+
+| Operation | Op Code | Function |
+
+|-----------|---------|----------|```powershelliverilog -o alu_clean.vvp rtl\alu_clean.v testbench\alu_testbench.v
+
+| ADD | 00 | A + B |
+
+| SUB | 01 | A - B |# Navigate to project directoryvvp alu_clean.vvp
+
+| AND | 10 | A & B |
+
+| OR | 11 | A \| B |cd Silicon_Sprint
+
+
+
+### Signal Breakdown# Step 2: Simulate Trojan ALU
+
+
+
+**Clean ALU (7 signals):**# Install Python dependenciesiverilog -o alu_trojan.vvp rtl\alu_trojan.v testbench\alu_testbench_trojan.v
+
+
+
+- `A[3:0]` - First operandpip install -r requirements.txtvvp alu_trojan.vvp
+
+- `B[3:0]` - Second operand
+
+- `op[1:0]` - Operation select
+
+- `result[3:0]` - Output
+
+- `carry` - Carry flag# Verify installation# Step 3: Run analysis
+
+- `zero` - Zero flag
+
+- `clk` - Clockpython --versionpython analysis\trojan_detector.py
+
+
+
+**Trojan ALU (11 signals = 7 + 4 Trojan):**iverilog -v```
+
+
+
+- All clean signals PLUS:```
+
+- `trojan_trigger` - Trigger detection
+
+- `trojan_active` - Activation state---
+
+- `trigger_counter` - State machine counter
+
+- `payload_mask` - Payload control---
+
+
+
+---## 📊 Analysis Methodology
+
+
+
+## 📈 Performance Metrics## Usage
+
+
+
+| Metric | Value |### 1. Data Collection
+
+|--------|-------|
+
+| **Detection Rate** | 100% (4/4 Trojans found) |### Automated Execution
+
+| **False Positives** | 0% |
+
+| **Analysis Time** | <1 second |**VCD Generation**: Both designs simulated with identical test vectors
+
+| **Test Vectors** | 1024 (exhaustive) |
+
+| **VCD File Size** | ~70KB each |The automated script handles compilation, simulation, and analysis:- 1024 exhaustive test cases (16×16×4 combinations)
+
+| **Peak Deviation** | 45,900% (trigger_counter) |
+
+| **Min Detection Threshold** | 10,300% (payload_mask) |- Value Change Dump (VCD) format for switching activity
+
+
+
+---```powershell- Signal-level toggle tracking
+
+
+
+## 📚 Technical Referencespython run_analysis.py
+
+
+
+This project implements techniques from:```### 2. Toggle Counting
+
+
+
+1. **BANGA, M. & HSIAO, M.** (2009). A region based approach for the identification of hardware Trojans. *IEEE HOST*.
+
+2. **RAD, R., et al.** (2008). Power supply signal calibration techniques for improving detection resolution to hardware Trojans. *ICCAD*.
+
+3. **NIST IR 8211** (2018). Hardware-Enabled Security: Techniques and Implementation.This executes:**Algorithm**:
+
+
+
+---```python
+
+
+
+## 🎓 Educational Value1. Verilog compilation for both designsFor each signal:
+
+
+
+Perfect for learning about:2. Simulation with exhaustive test vectors    Count transitions: 0→1 and 1→0
+
+
+
+- ✅ Hardware security and IC trust3. VCD file generation    Track multi-bit toggles in buses
+
+- ✅ Side-channel analysis techniques
+
+- ✅ Verilog design and simulation4. Statistical analysis    Store per-signal toggle counts
+
+- ✅ Statistical anomaly detection
+
+- ✅ VCD file parsing and analysis5. Report generation```
+
+- ✅ Python/MATLAB data analysis
+
+- ✅ Automated verification workflows
+
+
+
+---### Manual Execution### 3. Deviation Analysis
+
+
+
+## 🎯 Use Cases
+
+
+
+This project demonstrates:For step-by-step execution:**Metric**:
+
+
+
+1. **Academic Research** - Hardware Trojan detection methodologies```
+
+2. **Security Audits** - IC verification and trust validation
+
+3. **Tool Development** - Automated detection pipeline```powershellDeviation (%) = |Trojan_Toggles - Clean_Toggles| / Clean_Toggles × 100
+
+4. **Education** - Teaching hardware security concepts
+
+5. **Hackathons** - Complete working project with results# Step 1: Compile and simulate clean ALU```
+
+
+
+---iverilog -o alu_clean.vvp rtl\alu_clean.v testbench\alu_testbench.v
+
+
+
+## 🤝 Contributingvvp alu_clean.vvp**Thresholds**:
+
+
+
+This project was developed for the **Silicon Sprint Hackathon** (Digital Theme 4: Chip Security).- 🟢 **< 25%**: Normal variation
+
+
+
+### Team Focus# Step 2: Compile and simulate Trojan ALU- 🟡 **25-50%**: Suspicious (WARNING)
+
+
+
+- Hardware Trojan insertion techniquesiverilog -o alu_trojan.vvp rtl\alu_trojan.v testbench\alu_testbench_trojan.v- 🔴 **> 50%**: Highly suspicious (CRITICAL)
+
+- Side-channel analysis methods
+
+- Automated detection algorithmsvvp alu_trojan.vvp
+
+- Comprehensive visualization
+
+### 4. Statistical Detection
+
+---
+
+# Step 3: Run analysis (Python)
+
+## 📝 License
+
+python analysis\trojan_detector.py**Methods**:
+
+Educational and competition use. Developed for academic purposes.
+
+- **Mean/Median Analysis**: Population statistics
+
+---
+
+# Or run analysis (MATLAB)- **IQR Outlier Detection**: Q3 + 1.5×IQR threshold
+
+## 📞 Contact
+
+cd analysis- **Z-Score Analysis**: Signals with |z| > 2.5
+
+**Project:** Hardware Trojan Detection  
+
+**Repository:** [github.com/Lucii-666/Hardware-Trojan-](https://github.com/Lucii-666/Hardware-Trojan-)  matlab -r "trojan_detector"- **Quartile Analysis**: Distribution characterization
+
+**Hackathon:** Silicon Sprint 2025  
+
+**Theme:** Chip Security - Side-Channel-Based Trojan Detection```
+
+
+
+---### 5. Machine Learning Detection
+
+
+
+## 🏆 Project Achievements---
+
+
+
+- ✅ Complete end-to-end detection pipeline**Approach**: Anomaly detection via statistical outliers
+
+- ✅ 100% detection accuracy on test cases
+
+- ✅ Multiple presentation demo options## Detection Methodology- Z-score normalization
+
+- ✅ Comprehensive documentation
+
+- ✅ Cross-platform analysis tools- Automated threshold selection
+
+- ✅ Visual and statistical reporting
+
+- ✅ Realistic Trojan implementation### Phase 1: Data Collection- Ranking by suspicion level
+
+- ✅ Automated workflow scripts
+
+
+
+---
 
 Both designs are simulated with identical test vectors to generate switching activity data:---
 
+<div align="center">
 
+
+
+### ⭐ Star this repo if you find it useful!
 
 - 1024 exhaustive test cases covering all input combinations## 📈 Expected Results
 
+**Made with ❤️ for hardware security**
+
 - VCD (Value Change Dump) format for signal-level tracking
 
+*Last Updated: November 9, 2025*
+
 - Bit-level toggle event recording### Detection Report Preview
+
+</div>
 
 
 
@@ -853,5 +1271,6 @@ For technical questions or collaboration opportunities, please refer to the proj
 ---
 
 *Last Updated: November 9, 2025*
-#   H a r d w a r e - T r o j a n -  
+#   H a r d w a r e - T r o j a n - 
+ 
  
