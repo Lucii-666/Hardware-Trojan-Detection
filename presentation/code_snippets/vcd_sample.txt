@@ -1,0 +1,76 @@
+$date
+    November 09 2025
+$end
+$version
+    Icarus Verilog
+$end
+$timescale
+    1ns
+$end
+
+$scope module alu_trojan_tb $end
+$var wire 4 ! A [3:0] $end
+$var wire 4 " B [3:0] $end
+$var wire 2 # op [1:0] $end
+$var wire 4 $ result [3:0] $end
+$var wire 1 % carry $end
+$var wire 1 & zero $end
+
+    <!-- TROJAN-SPECIFIC SIGNALS (not in clean design!) -->
+$var reg 1 ' trojan_trigger $end
+$var reg 1 ( trojan_active $end
+$var reg 8 ) trigger_counter [7:0] $end
+$var reg 4 * payload_mask [3:0] $end
+
+$var reg 1 + clk $end
+$upscope $end
+$enddefinitions $end
+
+#0
+$dumpvars
+b0000 !
+b0000 "
+b00 #
+b0000 $
+0%
+1&
+0'    <!-- trojan_trigger = 0 -->
+0(    <!-- trojan_active = 0 -->
+b00000000 )  <!-- trigger_counter = 0 -->
+b0000 *      <!-- payload_mask = 0 -->
+0+
+$end
+
+#5
+1+    <!-- Clock rising edge -->
+b0011 !   <!-- A = 3 -->
+b0101 "   <!-- B = 5 -->
+
+#10
+0+
+b1000 $   <!-- result = 8 (3+5) -->
+
+<!-- ... normal operations ... -->
+
+#250
+1+
+b1111 !   <!-- A = 15 (all 1s) -->
+b1111 "   <!-- B = 15 (all 1s) -->
+
+#255
+1'    <!-- TROJAN TRIGGERED! -->
+1(    <!-- Trojan active -->
+b00000001 )  <!-- Counter incremented -->
+b0000 *      <!-- Payload mask set -->
+
+#260
+0+
+0'    <!-- Trigger deasserts -->
+
+<!-- This pattern repeats, creating massive toggle activity -->
+<!-- in trojan_trigger, trojan_active, trigger_counter, payload_mask -->
+
+<!-- KEY INSIGHT FOR PRESENTATION: -->
+<!-- Clean VCD has NONE of these Trojan signals -->
+<!-- Trojan VCD shows 100s of transitions on these signals -->
+<!-- This is our "smoking gun" evidence! -->

@@ -1,0 +1,48 @@
+================================================================================
+HARDWARE TROJAN DETECTION REPORT
+Side-Channel Analysis via Switching Activity
+================================================================================
+
+Report Generated: 2025-11-09 10:56:16
+
+--------------------------------------------------------------------------------
+STATISTICAL SUMMARY
+--------------------------------------------------------------------------------
+Total Signals Analyzed: 7
+Mean Deviation: 8221.22%
+Median Deviation: 4.84%
+Standard Deviation: 13742.33%
+Maximum Deviation: 45900.00%
+IQR-based Outlier Threshold: 29997.84%
+
+--------------------------------------------------------------------------------
+ANOMALY DETECTION RESULTS (25% Threshold)
+--------------------------------------------------------------------------------
+Anomalies Detected: 4
+
+Rank   Signal Name                    Deviation       Status
+--------------------------------------------------------------------------------
+1      trigger_counter                45900.00%        CRITICAL
+2      trojan_trigger                 20500.00%        CRITICAL
+3      trojan_active                  13700.00%        CRITICAL
+4      payload_mask                   10300.00%        CRITICAL
+
+--------------------------------------------------------------------------------
+MACHINE LEARNING-BASED DETECTION (Z-Score > 2.5)
+--------------------------------------------------------------------------------
+ML Anomalies Detected: 1
+
+  • trigger_counter: 45900.00% deviation
+
+--------------------------------------------------------------------------------
+CONCLUSION
+--------------------------------------------------------------------------------
+⚠ TROJAN DETECTED
+
+Evidence: 4 signals show abnormal switching activity
+above the 25% deviation threshold, indicating the presence of
+stealthy hardware modifications in the Trojan design.
+
+Most suspicious signal: trigger_counter with 45900.00% deviation
+
+================================================================================

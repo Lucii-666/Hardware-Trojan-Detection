@@ -1,0 +1,15 @@
+# Python Requirements for Hardware Trojan Detection
+# Install with: pip install -r requirements.txt
+
+# Core numerical computing
+numpy>=1.21.0
+
+# Visualization and plotting
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Optional: Enhanced analysis
+scipy>=1.7.0
+
+# Optional: Progress bars for long simulations
+tqdm>=4.62.0

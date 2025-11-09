@@ -1,0 +1,46 @@
+# Hardware Trojan Detection - Git Ignore
+
+# Simulation outputs
+*.vvp
+*.vcd
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Results (optional - comment out if you want to commit results)
+results/*.vcd
+results/*.log
+
+# But keep the directory
+!results/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Documentation builds
+docs/_build/
+docs/.doctrees/
