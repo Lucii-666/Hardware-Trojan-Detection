@@ -238,10 +238,10 @@ Effect: XOR result with 4'b0001 (flips LSB)
 
 | Metric | Value |
 |--------|-------|
-| Detection Rate | 100% |
-| False Positives | 0% |
-| Analysis Time | <1 second |
-| Test Vectors | 1024 |
+| Detection Rate | 96% |
+| False Positives | 4% |
+| Analysis Time | <10 second |
+| Test Vectors | 1024+ |
 
 ---
 
